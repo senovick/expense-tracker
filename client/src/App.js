@@ -1,24 +1,12 @@
 import React from 'react';
 import './App.css';
-import { Header } from './components/Header';
-import { Balance } from './components/Balance';
-import { IncomeExpenses } from './components/IncomeExpenses';
-import { TransactionList } from './components/TransactionList';
-import { AddTransaction } from './components/AddTransaction';
 
-import { GlobalProvider } from './context/GlobalState';
-
-function App() {
+const App = () => {
   return (
-    <GlobalProvider>
-      <Header />
-      <div className='container'>
-        <Balance />
-        <IncomeExpenses />
-        <TransactionList />
-        <AddTransaction />
-      </div>
-    </GlobalProvider>
+    <div>
+        <h1>Hello React App</h1>
+        <h2>How you like it?</h2>
+    </div>    
   );
 }
 

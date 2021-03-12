@@ -1,10 +1,8 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const colors = require('colors');
-const morgan = require('morgan');
-const transactions = require('./routes/transactions');
-const connectDB = require('./config/db');
-const path = require('path');
+import express from 'express';
+import cors from 'cors';
+import colors from 'colors';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';
 
 dotenv.config({ path: './config/config.env' });
 
@@ -12,21 +10,9 @@ connectDB();
 
 const app = express();
 
-app.use(express.json());
-
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
-
-app.use('/api/v1/transactions', transactions);
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-
-  app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-  );
-}
+app.use(express.json({ limit: "30mb", extended: true }));
+app.use(express.urlencoded({ limit: "30mb", extended: true }));
+app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 
