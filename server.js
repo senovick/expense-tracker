@@ -3,6 +3,7 @@ import cors from 'cors';
 import colors from 'colors';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
+import postRoutes from './routes/posts.js';
 
 dotenv.config({ path: './config/config.env' });
 
@@ -10,6 +11,7 @@ connectDB();
 
 const app = express();
 
+app.use('/posts', postRoutes);
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
